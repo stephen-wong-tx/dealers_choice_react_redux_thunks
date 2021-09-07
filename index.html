@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Guitar Wishlist</title>
+  <script src='/dist/main.js' defer></script>
+  <style>
+    body {
+      font-family: verdana;
+    }
+    nav {
+      display: flex;
+      justify-content: space-around;
+    }
+    .purchased {
+      text-decoration: line-through;
+    }
+    nav a.selected {
+      font-weight: bold;
+    }    
+    .purchaseButton {
+      border: 1px solid rgb(212, 212, 212);
+      border-radius: 5px;
+      width: 35%;
+      /* margin: .5em auto .5em auto; */
+      color: whitesmoke;
+    }
+    .purchaseButton:hover {
+      cursor: pointer;
+    }
+    .buyButton {
+      background-color: darkolivegreen;
+    }
+    .sellButton {
+      background-color: #c96131;
+    }
+    li {
+      margin-bottom: .4em;
+      margin-top: .2em;
+    }
+  </style>
+</head>
+<body>
+  <div id='root'></div>
+</body>
+</html>
