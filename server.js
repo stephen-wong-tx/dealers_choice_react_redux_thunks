@@ -10,48 +10,69 @@ app.use(express.json());
 
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
 
-app.get('/api/groceries', async(req, res, next) => {
+app.get('/api/guitars', async(req, res, next) => {
   try{
-    res.send(await Grocery.findAll());
+    res.send(await Guitar.findAll());
   }
   catch(error){
     next(error)
   }
 });
 
-app.get('/api/groceries/:id', async(req, res, next) => {
+app.get('/api/guitars/:id', async(req, res, next) => {
   try{
-    const grocery = await Grocery.findByPk(req.params.id);
-    res.send(grocery)
+    const guitar = await Guitar.findByPk(req.params.id);
+    res.send(guitar)
   }
   catch(error){
     next(error)
   }
 });
 
-app.put('/api/groceries/:id', async(req, res, next) => {
+app.get('/api/wallet', async(req, res, next) => {
+  try{
+    const wallet = await Wallet.findAll();
+    res.send(wallet)
+  }
+  catch(error){
+    next(error)
+  }
+});
+
+app.put('/api/wallet', async(req, res, next) => {
+  try{
+    const wallet = await Wallet.findAll();
+    await wallet.update(req.body)
+    res.send(wallet)
+  }
+  catch(error){
+    next(error)
+  }
+});
+
+app.put('/api/guitars/:id', async(req, res, next) => {
   try {
-    const grocery = await Grocery.findByPk(req.params.id);
-    await grocery.update(req.body);
-    res.send(grocery);
+    const guitar = await Guitar.findByPk(req.params.id);
+    await guitar.update(req.body);
+    res.send(guitar);
   }
   catch(error) {
     next(error)
   }
 });
 
-app.post('/api/groceries', async(req, res, next) => {
+app.post('/api/guitars', async(req, res, next) => {
   try{
-    res.send(await Grocery.create(req.body));
+    res.send(await Guitar.create(req.body));
   }
   catch(error){
     next(error)
   }
 });
 
-app.post('/api/groceries/random', async(req, res, next) => {
+app.post('/api/guitars/random', async(req, res, next) => {
   try{
-    res.send(await Grocery.createRandom());
+    res.send(await Guitar.createRandom());
   }
   catch(error){
     next(error)
@@ -73,8 +94,9 @@ const Sequelize = require('sequelize');
 const { STRING, BOOLEAN } = Sequelize;
 const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/test_groceries_db');
 const faker = require('faker');
+const { DECIMAL } = require('sequelize');
 
-const Grocery = conn.define('grocery', {
+const Guitar = conn.define('guitar', {
   name: {
     type: STRING,
     allowNull: false,
@@ -95,16 +117,23 @@ const Grocery = conn.define('grocery', {
 
 });
 
-Grocery.createRandom = function(){
-  return Grocery.create({ name: faker.commerce.productName() });
+const Wallet = conn.define('wallet', {
+  cash: {
+    type: DECIMAL
+  }
+})
+
+Guitar.createRandom = function(){
+  return Guitar.create({ name: faker.commerce.productName() });
 }
 
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
   await Promise.all([
-    Grocery.create({ name: 'Fender Strat' }),
-    Grocery.create({ name: 'Gibson Les Paul' }),
-    Grocery.create({ name: 'PRS Custom 24', purchased: true })
+    Guitar.create({ name: 'Fender Strat', imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/1958_Fender_Stratocaster.jpg/377px-1958_Fender_Stratocaster.jpg' }),
+    Guitar.create({ name: 'Gibson Les Paul', imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Full_front_R9_Les_Paul.jpg/220px-Full_front_R9_Les_Paul.jpg' }),
+    Guitar.create({ name: 'PRS Custom 24', imageURL: 'https://images.reverb.com/image/upload/s--P3EKRm1p--/f_auto,t_supersize/v1571952526/ftainpt4zthtueka47bu.jpg',purchased: true }),
+    Wallet.create({ cash: 1000 })
   ]);
 };
 

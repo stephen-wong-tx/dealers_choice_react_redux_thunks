@@ -1,25 +1,8 @@
 import React from 'react';
-import { updateGrocery, create, selectedGuitar } from './store';
+import { updateGuitar, create, selectedGuitar } from './store';
 import { connect } from 'react-redux';
 
-// const _Groceries = ({ groceries, view, toggle, create })=> {
-//   return(
-//     <div>
-//       <button onClick={ create }>Create Random?</button>
-//       <ul>
-//         {
-//           groceries.filter(grocery => !view || (grocery.purchased && view === 'purchased') || (!grocery.purchased && view === 'needs')).map( grocery => {
-//             return(
-//               <li onClick={ ()=> toggle(grocery) } key={ grocery.id } className={ grocery.purchased ? 'purchased' : "" }>{ grocery.name }</li>
-//             );
-//           })
-//         }
-//       </ul>
-//     </div>
-//   );
-// };
-
-const _SingleGuitar = ({ selectedGuitar })=> {
+const _SingleGuitar = ( { selectedGuitar } )=> {
   return(
     <div>
       <h1>Selected Guitar</h1>
@@ -34,7 +17,7 @@ const _SingleGuitar = ({ selectedGuitar })=> {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggle: (grocery) => dispatch(updateGrocery(grocery)),
+    toggle: (guitar) => dispatch(updateGuitar(guitar)),
     create: ()=> dispatch(create())
   };
 };

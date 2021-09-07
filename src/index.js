@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { connect, Provider } from 'react-redux';
 import Nav from './Nav';
-import store, { fetchGroceries, fetchSelectedGuitar } from './store';
-import Groceries from './Groceries';
+import store, { fetchGuitars, fetchSelectedGuitar, fetchWallet } from './store';
 import CreateForm from './CreateForm';
 import GuitarLists from './GuitarLists';
 import SingleGuitar from './SingleGuitar';
+import Wallet from './Wallet';
 
 class _App extends Component {
   componentDidMount(){
     this.props.bootstrap();
+    this.props.getWallet();
     window.addEventListener('hashchange', ()=> {
       this.props.setView(window.location.hash.slice(1));
       if (window.location.hash.slice(1).length < 3) this.props.setGuitar(window.location.hash.slice(1))
@@ -19,21 +20,19 @@ class _App extends Component {
     if (window.location.hash.slice(1).length < 3) this.props.setGuitar(window.location.hash.slice(1))
   }
   render(){
-    const { groceries, view } = this.props;
+    const { guitars, view } = this.props;
     return (
       <div>
         <h1>Your Guitar Wishlist</h1>
         <Nav />
-        <CreateForm />
+        <Wallet />
         { 
           !view ? 
-            <GuitarLists /> 
-            : 
-            view === 'purchased' || view === 'needs' ?
-            <Groceries /> 
-            :
-            <SingleGuitar />
+          <GuitarLists /> 
+          : 
+          <SingleGuitar />
         }
+        <CreateForm />
       </div>
     );
   }
@@ -44,7 +43,8 @@ const App = connect(
   (dispatch)=> {
     return{
       setView: (newView)=> dispatch({ type: 'SET_VIEW', view: newView }),
-      bootstrap: ()=> dispatch(fetchGroceries()),
+      bootstrap: ()=> dispatch(fetchGuitars()),
+      getWallet: ()=> dispatch(fetchWallet()),
       setGuitar: (guitar)=> dispatch(fetchSelectedGuitar(guitar))
     }
   }

@@ -1,14 +1,14 @@
 import React from 'react';
-import { updateGrocery, create } from './store';
+import { updateGuitar, create } from './store';
 import { connect } from 'react-redux';
 
-const _Groceries = ({ groceries, view, toggle, create })=> {
+const _Groceries = ({ guitars, view, toggle, create })=> {
   return(
     <div>
       <button onClick={ create }>create grocery?</button>
       <ul>
         {
-          groceries.filter(grocery => !view || (grocery.purchased && view === 'purchased') || (!grocery.purchased && view === 'needs')).map( grocery => {
+          guitars.filter(grocery => !view || (grocery.purchased && view === 'purchased') || (!grocery.purchased && view === 'needs')).map( grocery => {
             return(
               <div key={ grocery.id }>
                 <li className={ grocery.purchased ? 'purchased' : "" }>{ grocery.name }</li>

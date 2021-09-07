@@ -6,43 +6,143 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Guitar Wishlist</title>
   <script src='/dist/main.js' defer></script>
+  <script src="https://kit.fontawesome.com/dc998fff98.js" crossorigin="anonymous"></script>
   <style>
     body {
-      font-family: verdana;
+      font-family: Helvetica, Arial, sans-serif;
+      text-align: center;
+      background-color: rgb(233, 233, 233);
     }
     nav {
       display: flex;
       justify-content: space-around;
     }
     .purchased {
-      text-decoration: line-through;
+      box-shadow: 3px 3px 0 1px #1F8A70;
     }
     nav a.selected {
       font-weight: bold;
+    }
+    form{
+      border: solid 1px grey;
+      border-radius: 5px;
+      background-color:rgb(247, 247, 247);
+      width: 75%;
+      margin: auto;
+    }
+    input {
+      padding: .3em;
+      margin: .3em;
+      border-radius: 3px;
+      font-size: 1rem;
     }    
+    button{
+      cursor: pointer;
+      border-radius: 5px;
+      padding: .5em;
+      width: 25%;
+      margin: .5em;
+      background-color: rgb(57, 86, 116);
+      color: white;
+      font-size: 1rem;
+    }
     .purchaseButton {
       border: 1px solid rgb(212, 212, 212);
       border-radius: 5px;
-      width: 35%;
-      /* margin: .5em auto .5em auto; */
+      width: auto;
+      padding: .7em .5em .7em .5em;
+      /* margin: .5em; */
+      margin-bottom: .5em;
       color: whitesmoke;
     }
     .purchaseButton:hover {
       cursor: pointer;
     }
     .buyButton {
-      background-color: darkolivegreen;
+      background-color: #1F8A70;
     }
     .sellButton {
-      background-color: #c96131;
+      background-color: #BF820F;
     }
-    li {
-      margin-bottom: .4em;
-      margin-top: .2em;
+    #main-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2em;
+      margin: 1em;
+    }
+    #main-wrapper > div {
+      margin: .5em;
+      list-style-type: none;
+      border: 1px solid grey;
+      border-radius: 2px;
+      /* display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap; */
+    }
+    .subHeader {
+      font-size: .8rem;
+      color:#1F8A70;
+    }
+    .shopLink{
+      font-size: .9em;
+      color:#BF820F;
+    }
+    .cardBody{
+      /* background-color: #083359; */
+      margin: 0 .5em .5em .5em;
+      padding: 0 .5em .5em .5em;
+      background-size: cover;
+      background-blend-mode: multiply;
+    }
+    .container{
+      margin-top:0;
+      padding-top: 0;
+    }
+    h3{
+      font-size: 1.5rem;
+    }
+    h2{
+      margin: .5em;
+    }
+    .cardHeading{
+      background-color: white;
+      color:rgb(57, 86, 116);
+      padding: .5em;
+      margin-top: 0;
+      border-radius: 0px;
+      width: auto;
+    }
+    .cardHeading a{
+      text-decoration: none;
+      margin-top: 0;
+    }
+    .indivLink {
+      text-decoration: none;
+      width: 100%;
+    }
+    #wallet{
+      background-color: white;
+      width: 75%;
+      padding: 1em;
+      margin: 1em auto 1em auto;
+    }
+    .cardImage{
+      margin-top: .5em;
+      width: 250px;
+      display: inline-block;
+    }
+    #updateWallet{
+      width:33%;
+      margin: auto;
+      background-color: #1F8A70;
     }
   </style>
 </head>
 <body>
   <div id='root'></div>
+  <div> <i class="fas fa-check-circle"></i></div>
 </body>
 </html>
