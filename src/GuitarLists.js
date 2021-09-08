@@ -69,24 +69,33 @@ const _GuitarLists = ({ guitars, view, toggle, create, addCash, spendCash, updat
                     { 
                       guitar.purchased ? 
                         <h3 className="subHeader">
+                          IN COLLECTION &nbsp;
                           <i className="fas fa-check-circle"></i> 
-                          IN COLLECTION
                         </h3> 
-                      : null 
+                      : <div>
+                        <a href={"https://www.amazon.com/s?k=electric+guitars"+" "+guitar.name} 
+                           className="shopLink" 
+                           target="_blank">
+                          Shop Around Amazon &nbsp;
+                          <i class="fas fa-long-arrow-alt-right"></i>
+                        </a>
+                        <br />
+                        </div>
                     }
                     
+                    {/* {  
+                      !guitar.purchased ? 
+                      <a href={"https://www.amazon.com/s?k=electric+guitars"+" "+guitar.name} className="shopLink" target="_blank">Shop Around (Amazon)</a>
+                      : ``
+                    } */}
+
+                    <br />
+
                     {
                       guitar.purchased?            
                       // <div onClick={ () =>  addCash(addMonies(), guitar) } className='purchaseButton' >Sell Me</div>
                       <div onClick={ () =>  addMoneyAndToggle(guitar) } className='purchaseButton sellButton' >Sell Now</div>
                       : <div onClick={ () => spendMoneyAndToggle(guitar) } className='purchaseButton buyButton'>Add to Collection (Buy Now)</div>
-                    }
-                    
-                    <br />
-                    {  
-                      !guitar.purchased ? 
-                      <a href={"https://www.amazon.com/s?k=electric+guitars"+" "+guitar.name} className="shopLink" target="_blank">Shop Around (Amazon)</a>
-                      : ``
                     }
                   </div>
                 </div>
