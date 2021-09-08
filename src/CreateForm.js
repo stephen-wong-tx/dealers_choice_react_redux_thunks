@@ -26,7 +26,7 @@ class CreateForm extends Component{
           <br />
           <button onClick={()=> {
             // !selectedGuitar ? 
-            // this.props.create(this.state)
+            this.props.create(this.state)
             // :
             // this.props.editGuitar(this.state)
             // this.props.create(this.state)

@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import axios from 'axios';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const view = ( state = '', action)=> {
   if (action.type === 'SET_VIEW'){
@@ -39,10 +40,10 @@ const wallet = ( state = [], action) => {
     return [action.value];
   }
   if (action.type === 'SPEND_FUNDS'){
-    return state.map(fund => fund.cash -= action.value);
+    return [action.value];
   }
   if (action.type === 'UPDATE_FUNDS'){
-    return state.map(wallet => action.wallet)
+    return state.map(wallet => wallet.id === action.wallet.id? action.wallet : wallet);
   }
   return state;
 }
@@ -57,12 +58,13 @@ const store = createStore(
       wallet
     }
   ),
-  applyMiddleware(logger, thunk)
-);
+  composeWithDevTools(
+    applyMiddleware(logger, thunk)
+));
 
 export const fetchWallet = () => {
   return async(dispatch)=> {
-    const wallet = (await axios.get(`/api/wallet`)).data;
+    const wallet = (await axios.get(`/api/wallet`)).data; 
     dispatch({
       type: 'LOAD_WALLET',
       wallet
@@ -72,10 +74,10 @@ export const fetchWallet = () => {
 
 export const updateWallet = (wallet) => {
   return async(dispatch)=> {
-    const updated = (await axios.put(`/api/wallet`, { cash: wallet.cash })).data;
+    const updated = (await axios.put(`/api/wallet/${wallet.id}`, { cash: wallet.cash })).data;
     dispatch({ type: 'UPDATE_FUNDS', wallet: updated })
-  }
-}
+  };
+};
 
 export const addFunds = (value) => {
   return async(dispatch)=> {

@@ -39,11 +39,11 @@ app.get('/api/wallet', async(req, res, next) => {
   }
 });
 
-app.put('/api/wallet', async(req, res, next) => {
+app.put('/api/wallet/:id', async(req, res, next) => {
   try{
-    const wallet = await Wallet.findAll();
-    await wallet.update(req.body)
-    res.send(wallet)
+    const wallet = await Wallet.findByPk(req.params.id);
+    await wallet.update(req.body);
+    res.send(wallet);
   }
   catch(error){
     next(error)
@@ -113,6 +113,11 @@ const Guitar = conn.define('guitar', {
     type: STRING,
     allowNull: false,
     defaultValue: 'https://thumb7.shutterstock.com/image-photo/stock-vector-guitar-450w-5599069.jpg'
+  },
+  msrp: {
+    type: DECIMAL,
+    allowNull: false,
+    defaultValue: 1000
   }
 
 });
@@ -130,10 +135,10 @@ Guitar.createRandom = function(){
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
   await Promise.all([
-    Guitar.create({ name: 'Fender Strat', imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/1958_Fender_Stratocaster.jpg/377px-1958_Fender_Stratocaster.jpg' }),
-    Guitar.create({ name: 'Gibson Les Paul', imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Full_front_R9_Les_Paul.jpg/220px-Full_front_R9_Les_Paul.jpg' }),
-    Guitar.create({ name: 'PRS Custom 24', imageURL: 'https://images.reverb.com/image/upload/s--P3EKRm1p--/f_auto,t_supersize/v1571952526/ftainpt4zthtueka47bu.jpg',purchased: true }),
-    Wallet.create({ cash: 1000 })
+    Guitar.create({ name: 'Fender Strat', msrp: 1100, imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/1958_Fender_Stratocaster.jpg/377px-1958_Fender_Stratocaster.jpg' }),
+    Guitar.create({ name: 'Gibson Les Paul', msrp: 1200, imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Full_front_R9_Les_Paul.jpg/220px-Full_front_R9_Les_Paul.jpg' }),
+    Guitar.create({ name: 'PRS Custom 24', msrp: 1400, imageURL: 'https://images.reverb.com/image/upload/s--P3EKRm1p--/f_auto,t_supersize/v1571952526/ftainpt4zthtueka47bu.jpg',purchased: true }),
+    Wallet.create({ cash: 1500 })
   ]);
 };
 

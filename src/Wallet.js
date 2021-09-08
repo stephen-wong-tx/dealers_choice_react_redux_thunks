@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
-import { updateGuitar, create, selectedGuitar, fetchWallet } from './store';
+import { updateGuitar, create, selectedGuitar, fetchWallet, addFunds, spendFunds, updateWallet } from './store';
 import { connect } from 'react-redux';
 
-// class _Wallet extends Component {
-//   componentDidMount() {
-//     this.props.getWallet();
-//   }
-//   render(){
-//     return(
-//       <div id="wallet">
-//         <h2><i className="fas fa-wallet"></i> <br />
-//         Wallet</h2>
-//         <h3>Current Cash:</h3>
-  
-//       </div>
-//     )
-//   }
-// }
 
-const _Wallet = ({ wallet }) => {
+const _Wallet = ({ addCash, spendCash, updateCash, wallet }) => {
   console.log(':) my wallet:', wallet)
+  const addMonies = () => {
+    let cash = wallet[0].cash * 1;
+    wallet[0].cash = cash + 500;
+    return wallet[0];
+  }
+  const addMoneyAndToggle = async (guitar) => {
+    await toggle(guitar);
+    await addCash(addMonies())
+  }
+  const spendMonies = () => {
+    let cash = wallet[0].cash *1;
+    wallet[0].cash = cash - 1000;
+    return wallet[0];
+  }
+  const spendMoneyAndToggle = async (guitar)=> {
+    await toggle(guitar);
+    await spendCash(spendMonies());
+  }
   return(
     <div id="wallet">
       <h2><i className="fas fa-wallet"></i> <br />
@@ -36,12 +39,30 @@ const _Wallet = ({ wallet }) => {
         // <p>${wallet.cash}</p>
       }
       
-
+      <div 
+        onClick={ () => updateCash(wallet[0]) } 
+        id="updateWallet" 
+        className="purchaseButton">
+        Update Wallet
+      </div>
     </div>
   );
 };
 
-const Wallet = connect(state => state)(_Wallet);
+const mapDispatchToProps = (dispatch) => {
+  return{
+    addCash: (wallet, guitar)=>{
+      return dispatch(addFunds(wallet))
+    },
+    spendCash: (wallet, guitar)=> {
+      return dispatch(spendFunds(wallet))
+    },
+    updateCash: (wallet) => dispatch(updateWallet(wallet))
+  }
+}
+
+const Wallet = connect(state => state, mapDispatchToProps)(_Wallet);
+
 // const Wallet = connect(
 //   state => state,
 //   (dispatch) => {
