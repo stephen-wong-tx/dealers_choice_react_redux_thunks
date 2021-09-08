@@ -25,25 +25,26 @@ const _Wallet = ({ addCash, spendCash, updateCash, wallet }) => {
   }
   return(
     <div id="wallet">
-      <h2><i className="fas fa-wallet"></i> <br />
-        Wallet
-      </h2>
-      {
-        wallet.map( fund => {
-          return(
-            <div key={fund.id}>
-              <p>${fund.cash}</p>
-            </div>
-          )
-        })
-        // <p>${wallet.cash}</p>
-      }
+      <h2><i className="fas fa-wallet"></i> Wallet:</h2>
+      <div id="walletFunds">
+        {
+          wallet.map( fund => {
+            return(
+              <div key={fund.id}>
+                <p>${fund.cash}</p>
+              </div>
+            )
+          })
+          // <p>${wallet.cash}</p>
+        }
+      </div>
+      <div id="space">&nbsp;</div>
       
       <div 
         onClick={ () => updateCash(wallet[0]) } 
         id="updateWallet" 
         className="purchaseButton">
-        Update Wallet
+        Update Wallet <i class="far fa-arrow-alt-circle-right"></i>
       </div>
     </div>
   );

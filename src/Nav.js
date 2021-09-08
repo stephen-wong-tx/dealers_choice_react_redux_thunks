@@ -7,8 +7,8 @@ const Nav = ({ guitars, view })=> {
   return (
     <nav>
       <a href='#' className={ !view ? 'selected' : '' }>All ({ guitars.length })</a> 
-      <a href='#needs' className={ view === 'needs' ? 'selected' : '' }> Needs({ needs.length })</a>
-      <a href='#purchased' className={ view === 'purchased' ? 'selected': '' }>Purchased({ purchased.length })</a>
+      <a href='#needs' className={ view === 'needs' ? 'selected' : '' }> Wishlist({ needs.length })</a>
+      <a href='#purchased' className={ view === 'purchased' ? 'selected': '' }>Collection({ purchased.length })</a>
     </nav>
   );
 };

@@ -18,7 +18,7 @@
       justify-content: space-around;
     }
     .purchased {
-      box-shadow: 3px 3px 0 1px #bf960f;
+      box-shadow: 3px 4px 0 1px #bf960f;
     }
     nav a.selected {
       font-weight: bold;
@@ -46,7 +46,7 @@
       width: 25%;
       margin: .5em;
       background-color: transparent;
-      color:rgb(0, 97, 97);
+      color:black;
       font-size: 1rem;
     }
     .purchaseButton {
@@ -105,6 +105,10 @@
       margin-top:0;
       padding-top: 0;
     }
+    h1{
+      color:rgb(43, 43, 43);
+      font-size: 2.7rem;
+    }
     h3{
       font-size: 1.5rem;
     }
@@ -130,9 +134,13 @@
     }
     #wallet{
       background-color: white;
+      border-radius: 5px;
       width: 75%;
       padding: 1em;
       margin: 1em auto 1em auto;
+      display: flex;
+      align-items:flex-start; 
+      flex-wrap: wrap;
     }
     .cardImage{
       width: 85%;
@@ -144,8 +152,10 @@
     }
     #updateWallet{
       width:33%;
-      margin: auto;
-      background-color: #1F8A70;
+      margin: right;
+      background-color: #BF820F;
+      align-self: flex-end;
+      /* flex-grow: 1; */
     }
     .priceTag{
       font-style: italic;
@@ -175,6 +185,22 @@
     }
     .imageBackground > a {
       margin-top: 5em;
+    }
+    #walletFunds{
+      /* display: flex; */
+      /* flex-direction: column;
+      justify-content: center;
+      align-items: center; */
+      font-size: 1.05em;
+      /* flex-grow: 1; */
+      justify-self: flex-start;
+      align-self: flex-start;
+    }
+    #space{
+      flex-grow: 1;
+    }
+    nav a {
+      font-size: .9rem;
     }
   </style>
 </head>

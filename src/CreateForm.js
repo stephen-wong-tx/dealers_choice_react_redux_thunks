@@ -19,7 +19,7 @@ class CreateForm extends Component{
       <div>
         <br />
         <form>
-          <h2>Add a Guitar</h2>
+          <h2>Add a Guitar to Wishlist</h2>
           <input placeholder="Guitar" value={ name } onChange={ ev => this.setState({ name: ev.target.value , id: guitarId}) }/>
           <br />
           <input placeholder="Image URL" value={ imageURL } onChange={ ev => this.setState({ imageURL: ev.target.value }) }/>

@@ -23,14 +23,17 @@ class _App extends Component {
     const { guitars, view } = this.props;
     return (
       <div>
-        <h1>Your Guitar Wishlist</h1>
         <Nav />
+        <br />
+        <h1>Your Guitar Collection</h1>
         <Wallet />
         { 
           !view ? 
           <GuitarLists /> 
           : 
+          view.length < 3 ?
           <SingleGuitar />
+          : <GuitarLists />
         }
         <CreateForm />
       </div>
